@@ -1,0 +1,61 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <!-- <mat-toolbar> -->
+        <div class="ml-auto divClose">
+            <button mat-mini-fab color="warn" (click)="drawer.close()">
+            <mat-icon >close</mat-icon>
+                </button>
+        </div>
+        <div class="divLogo">
+            <img src="assets/imgs/bk2.png" alt="logo" class="logo ">
+        </div>
+        <!-- </mat-toolbar> -->
+        <mat-nav-list>
+            <mat-divider></mat-divider>
+            <a mat-list-item class="nav-link" routerLinkActive="list-item-active" routerLink="home">
+                <mat-icon class="mr-1">home</mat-icon> Home</a>
+            <mat-divider></mat-divider>
+            <a mat-list-item class="nav-link" routerLinkActive="list-item-active" routerLink="bak2">
+                <mat-icon class="mr-1">article</mat-icon> Bac 2</a>
+            <mat-divider></mat-divider>
+            <a mat-list-item class="nav-link" routerLinkActive="list-item-active" routerLink="bak1">
+                <mat-icon class="mr-1">article</mat-icon> Bac 1</a>
+            <mat-divider></mat-divider>
+            <a mat-list-item class="nav-link" routerLinkActive="list-item-active" routerLink="eme5">
+                <mat-icon class="mr-1">article</mat-icon> 5 eme</a>
+            <mat-divider></mat-divider>
+            <a mat-list-item class="nav-link" routerLinkActive="list-item-active" routerLink="comments">
+                <mat-icon class="mr-1">comments</mat-icon>Comments</a>
+            <mat-divider></mat-divider>
+            <a mat-list-item class="nav-link" routerLinkActive="list-item-active" routerLink="users">
+                <mat-icon class="mr-1">perm_identity</mat-icon>Profile</a>
+            <mat-divider></mat-divider>
+
+
+
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar class="bg-primary">
+            <button type="button" aria-label="Toggle sidenav" mat-raised-button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+            <span class="ml-3"> LYCEE</span>
+            <div class="ml-auto nav_buttons">
+                <button mat-raised-button class="mr-1 btnNav" (click)="OnLogOut()"> <mat-icon>logout</mat-icon>Log Out</button>
+                <a mat-raised-button class="mr-1 btnNav" routerLink="users/register">
+                    <mat-icon>exit_to_app</mat-icon>Sign up</a>
+                <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                    <button mat-menu-item (click)="OnLogOut()">Log Out</button>
+                    <button mat-menu-item><a  routerLink="users/register">Sign Up</a></button>
+                </mat-menu>
+            </div>
+        </mat-toolbar>
+        <div class=" container wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

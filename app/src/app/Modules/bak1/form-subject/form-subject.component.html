@@ -1,0 +1,69 @@
+<!-- div of lessons -->
+<div class="card container mt-2" [ngClass]="{'hide':!SelectLesson}">
+    <h2><u><b>Ajouter un cours:</b></u></h2>
+    <form [formGroup]='_service.formcours' class="card container" (ngSubmit)="AddLisson($event)">
+        <mat-form-field appearance="fill">
+            <mat-label>Title of the lesson:</mat-label>
+            <input formControlName="lisson" matInput>
+            <mat-icon matSuffix>cancel</mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>le Nom de module:</mat-label>
+            <mat-select formControlName="modole" [(value)]="Mselect">
+                <mat-option *ngFor="let path of paths" [value]="path.codeM">{{path.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div align="center">
+            <button mat-raised-button color="primary"><mat-icon class="mr-1">save</mat-icon>Ajouter</button>
+        </div>
+    </form>
+</div>
+
+<div class="container card border  mt-2 " [ngClass]="{'hide':!SelectBlog}">
+    <span class="mat-toolbar mt-2 bg-secondary" align="center" style="border-radius:5px ;"><h2><u><b>Ajouter un Blog:</b></u></h2></span>
+    <form [formGroup]="_service.formSubject" (ngSubmit)="onSubmit()" class="card container">
+        <mat-form-field appearance="fill">
+            <mat-label>Cours:</mat-label>
+            <mat-select formControlName="cours" [(value)]="coursSelected">
+                <mat-option *ngFor="let cours of lissons" [value]="cours._id">{{cours.title}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" color="primary">
+            <mat-label>Title:</mat-label>
+            <input formControlName="title" matInput>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+        <p-editor formControlName="description" [style]="{'height':'320px'}">
+        </p-editor>
+
+
+        <!-- </mat-form-field> -->
+        <div class="" align="center">
+            <button mat-raised-button type="submit" color="primary" [disabled]="_service.formSubject.invalid"><mat-icon class="mr-1">save</mat-icon>Save</button>
+            <button mat-raised-button color="warn" type="reset" class="ml-1" matTooltip="EMPTY THE FORM!" matTooltipPosition="above"> <mat-icon class="mr-1">cancel</mat-icon>Cancel</button>
+        </div>
+    </form>
+</div>
+
+<div class="card container mt-2" [ngClass]="{'hide':!SelectTd}">
+    <h2><u><b>Ajouter un TD:</b></u></h2>
+    <form [formGroup]='_service.formTd' class="card container" (ngSubmit)="AddTd()">
+        <mat-form-field appearance="fill">
+            <mat-label>Cours:</mat-label>
+            <mat-select formControlName="cours" [(value)]="Sselected">
+                <mat-option *ngFor="let cours of lissons" [value]="cours._id">{{cours.title}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Title of the Td:</mat-label>
+            <input formControlName="title" matInput>
+            <!-- <mat-icon matSuffix (click)="clear()">cancel</mat-icon> -->
+        </mat-form-field>
+        <p-editor formControlName="description" [style]="{'height':'320px'}" appearance="outline">
+        </p-editor>
+        <div align="center">
+            <button mat-raised-button color="primary" [disabled]="_service.formTd.invalid"><mat-icon class="mr-1">save</mat-icon>Save</button>
+            <button mat-raised-button color="warn" [disabled]="_service.formTd.invalid" type="reset"><mat-icon class="mr-1">cancel</mat-icon>Cancel</button>
+        </div>
+    </form>
+</div>

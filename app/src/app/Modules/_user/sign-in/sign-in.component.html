@@ -1,0 +1,39 @@
+<!-- <div class="container-fluid"> -->
+<!-- <div class="ml-auto"> -->
+<!-- <mat-icon mat-icon-button (click)="onClose()">close</mat-icon> -->
+<!-- </div> -->
+
+
+<mat-card class="container-fluid  login-wraper ">
+    <div> <img src="/assets/imgs/user.png" id="icon" alt="User icon"></div>
+    <div class="alert alert-danger" *ngIf="error">{{error}}</div>
+
+    <h2><u>LOG IN:</u> <sub align="end">If you do not have an account create a new one.SIGN UP</sub></h2>
+    <form [formGroup]="_AuthService.formSignIn" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+            <mat-label>E-mail:</mat-label>
+            <input formControlName="email" matInput type="email" placeholder="Toto@gmail.com*">
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="_AuthService.formSignIn.controls['email'].errors?.required"> This field is mandatory</mat-error>
+            <mat-error *ngIf="_AuthService.formSignIn.controls['email'].errors?.email"> This email adress not valid</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Password:</mat-label>
+            <input formControlName="password" matInput type="password" placeholder="********">
+            <!-- <input formControlName="password" required matInput type="password" placeholder="********" [type]="!hide ? 'password':'text'"> -->
+            <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide"> -->
+            <mat-icon matSuffix>visibility_off</mat-icon>
+            <!-- </button> -->
+            <mat-error *ngIf="_AuthService.formSignIn.controls['password'].errors?.required"> This field is mandatory</mat-error>
+            <mat-error *ngIf="_AuthService.formSignIn.controls['password'].errors?.minlength">password must be atleast 4 character</mat-error>
+            <mat-hint align="end">4 characters atleast</mat-hint>
+        </mat-form-field><br><br>
+        <mat-divider></mat-divider><br>
+        <div align="end">
+            <button mat-raised-button class="mr-2" type="submit" color="primary" [disabled]="_AuthService.formSignIn.invalid"><mat-icon class="mr-1">login</mat-icon>SIGN IN</button>
+            <button mat-raised-button color="warn" type="reset" matTooltip="YOU WILL DELETE THESE INFORMATION !" matTooltipPosition="above"><mat-icon>cancel</mat-icon>Cancel</button>
+            <!-- <a class="ml-2" routerLinkActive="list-item-active" routerLink="register">Add account</a> -->
+        </div>
+    </form>
+</mat-card>
+<!-- </div> -->

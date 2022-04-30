@@ -1,0 +1,8 @@
+<div class="" [ngClass]="{'hide':role=='USER'}">
+<button mat-raised-button color="warn" class="m-1" (click)="AddLesson($event)"><mat-icon>add</mat-icon>Add lesson</button>
+<button mat-raised-button color="warn" class="m-1" (click)="AddBlog($event)"><mat-icon>add</mat-icon>Add blog</button>
+<button mat-raised-button color="warn" class="m-1" (click)="AddTd($event)"><mat-icon>add</mat-icon>Add TD</button>
+</div>
+  <div class="">
+      <router-outlet></router-outlet>
+  </div>

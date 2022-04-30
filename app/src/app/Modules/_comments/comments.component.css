@@ -1,0 +1,23 @@
+.foto {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+mat-card {
+  border-left: 5px solid royalblue;
+  /* height: 100%; */
+}
+
+.ng-container {
+  /* margin-left: 20px; */
+  border-left: 3px solid #555d75;
+  padding-left: 5px;
+  background-color: #dddbdf;
+  margin-bottom: 2px;
+}
+
+.reply {
+  padding: 0 0%;
+}
+/*# sourceMappingURL=comments.component.css.map */

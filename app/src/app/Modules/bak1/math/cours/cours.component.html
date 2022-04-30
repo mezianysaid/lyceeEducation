@@ -1,0 +1,144 @@
+<mat-grid-list cols="1" rowHeight="50px">
+    <mat-grid-tile>
+        <mat-form-field class="search-form-field" floatLabel="never">
+            <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="SearchByTitle()">
+            <mat-icon matSuffix *ngIf="!searchKey">search</mat-icon>
+            <button mat-button color="primary" mat-icon-button matSuffix aria-label="Clear" *ngIf="searchKey" (click)="onsearchClear()">
+            <mat-icon>cancel</mat-icon> </button>
+        </mat-form-field>
+    </mat-grid-tile>
+</mat-grid-list>
+<div *ngIf="!searchKey;else forSearch">
+    <div class="card container mt-2" *ngFor="let cours of courses">
+        <div class="row container">
+            <h1 class="col-6 " align="end"><b><u>{{cours.title}}</u></b></h1>
+            <div class="col-6" align="end">
+                <h1> <a mat-raised-button color="warn" (click)="RouteToTd()">TDs</a></h1>
+            </div>
+        </div>
+        <div class="card mt-2 container" *ngFor="let blog of cours.blogs">
+            <div class="container" align="center">
+                <h2><b>{{ blog.title}}</b></h2>
+            </div>
+            <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(blog.description!)" align="end"></div>
+            <div *ngFor="let img of blog.images" align="center">
+                <img [src]="img.filename" class="mt-1 ">
+            </div>
+
+
+            <div class="container shows">
+                <div align="end" [ngClass]="{'hide':role=='USER'}">
+                    <button mat-raised-button class="ml-auto m-1" (click)="showDivAdd(blog._id)"><mat-icon class="mr-1">add</mat-icon> Add Image</button>
+                    <button mat-raised-button class="ml-auto m-1" (click)="showPdfForm(blog._id)"><mat-icon class="mr-1">add</mat-icon> Add PDF</button>
+                </div>
+                <div class="container card" *ngIf="show==true" [ngClass]="{'hide':blog._id!=blg_id}">
+                    <u><b>Ajouter une image:</b></u>
+                    <form [formGroup]="service.formGallery" class="card container" (ngSubmit)="addImage(blog._id)">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select your File</mat-label>
+                            <ngx-mat-file-input formControlName="filename" placeholder="Select Image" valuePlaceholder="No file selected">
+                                <mat-icon matSuffix>image</mat-icon>
+                            </ngx-mat-file-input>
+                        </mat-form-field>
+                        <div align="end">
+                            <button mat-raised-button color="primary" class="ml-1" [disabled]="service.formGallery.invalid"> <mat-icon class="mr-1">save</mat-icon>Save</button>
+                            <button mat-raised-button color="warn" type="reset" class="ml-1" matTooltip="EMPTY THE FORM!" matTooltipPosition="above"> <mat-icon class="mr-1">cancel</mat-icon>Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="container card" *ngIf="showpdf==true" [ngClass]="{'hide':blog._id!=blg_id}">
+                    <u><b>Ajouter un PDF:</b></u>
+                    <form [formGroup]="service.formPdf" class="container" (ngSubmit)="AddPdf(cours._id)">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select your File</mat-label>
+                            <ngx-mat-file-input formControlName="pdfname" placeholder="Select File " valuePlaceholder="No file selected">
+                                <mat-icon matSuffix>image</mat-icon>
+                            </ngx-mat-file-input>
+                        </mat-form-field>
+                        <div align="end">
+                            <button mat-raised-button color="primary" class="ml-1" [disabled]="service.formPdf.invalid"> <mat-icon class="mr-1">save</mat-icon>Save</button>
+                            <button mat-raised-button color="warn" type="reset" class="ml-1" matTooltip="EMPTY THE FORM!" matTooltipPosition="above"> <mat-icon class="mr-1">cancel</mat-icon>Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container card mt-1">
+            <div *ngFor="let pd of cours.pdfs;let i=index " class="row pdf">
+
+                <ol>{{i+1}} ~ {{pd.pdfname}}</ol>
+                <button mat-raised-button (click)="Downloadfile(pd.pdfpath)" class="border border-warning  ml-1 mr-2"> <mat-icon class="mr-1">download</mat-icon>Download PDF</button>
+                <mat-divider></mat-divider>
+                <mat-divider class="mt-1"></mat-divider>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #forSearch>
+
+    <div class="card container mt-2" *ngFor="let cours of Searchlessons">
+        <div class="row">
+            <h1 class="col-6 " align="end"><b><u>{{cours.title}}</u></b></h1>
+            <div class="col-6" align="end">
+                <h1> <a mat-raised-button color="warn" (click)="RouteToTd()">TDs</a></h1>
+            </div>
+        </div>
+        <div class="card mt-2 " *ngFor="let blog of cours.blogs">
+            <div class="container" align="center">
+                <h2><b>{{ blog.title}}</b></h2>
+
+            </div>
+            <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(blog.description!)" align="end"></div>
+            <div *ngFor="let img of blog.images" align="center">
+                <img [src]="img.filename" class="mt-1 ">
+            </div>
+
+
+            <div class="container shows">
+                <div align="end" [ngClass]="{'hide':role=='USER'}">
+                    <button mat-raised-button class="ml-auto m-1" (click)="showDivAdd(blog._id)"><mat-icon class="mr-1">add</mat-icon> Add Image</button>
+                    <button mat-raised-button class="ml-auto m-1" (click)="showPdfForm(blog._id)"><mat-icon class="mr-1">add</mat-icon> Add PDF</button>
+                </div>
+                <div class="container card" *ngIf="show==true" [ngClass]="{'hide':blog._id!=blg_id}">
+                    <u><b>Ajouter une image:</b></u>
+                    <form [formGroup]="service.formGallery" class="card container" (ngSubmit)="addImage(blog._id)">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select your File</mat-label>
+                            <ngx-mat-file-input formControlName="filename" placeholder="Select Image" valuePlaceholder="No file selected">
+                                <mat-icon matSuffix>image</mat-icon>
+                            </ngx-mat-file-input>
+                        </mat-form-field>
+                        <div align="end">
+                            <button mat-raised-button color="primary" class="ml-1" [disabled]="service.formGallery.invalid"> <mat-icon class="mr-1">save</mat-icon>Save</button>
+                            <button mat-raised-button color="warn" type="reset" class="ml-1" matTooltip="EMPTY THE FORM!" matTooltipPosition="above"> <mat-icon class="mr-1">cancel</mat-icon>Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="container card" *ngIf="showpdf==true" [ngClass]="{'hide':blog._id!=blg_id}">
+                    <u><b>Ajouter un PDF:</b></u>
+                    <form [formGroup]="service.formPdf" class="container" (ngSubmit)="AddPdf(cours._id)">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Select your File</mat-label>
+                            <ngx-mat-file-input formControlName="pdfname" placeholder="Select File " valuePlaceholder="No file selected">
+                                <mat-icon matSuffix>image</mat-icon>
+                            </ngx-mat-file-input>
+                        </mat-form-field>
+                        <div align="end">
+                            <button mat-raised-button color="primary" class="ml-1" [disabled]="service.formPdf.invalid"> <mat-icon class="mr-1">save</mat-icon>Save</button>
+                            <button mat-raised-button color="warn" type="reset" class="ml-1" matTooltip="EMPTY THE FORM!" matTooltipPosition="above"> <mat-icon class="mr-1">cancel</mat-icon>Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container card mt-1">
+            <div *ngFor="let pd of cours.pdfs;let i=index " class="row pdf">
+                <ol>{{i+1}} ~ {{pd.pdfname}}</ol>
+                <button mat-raised-button (click)="Downloadfile(pd.pdfpath)" class="border border-warning  ml-1 mr-2"> <mat-icon class="mr-1">download</mat-icon>Download PDF</button>
+                <mat-divider></mat-divider>
+                <mat-divider class="mt-1"></mat-divider>
+            </div>
+        </div>
+    </div>
+</ng-template>

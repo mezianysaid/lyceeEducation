@@ -1,0 +1,37 @@
+<mat-card>
+    <div class="alert alert-success" *ngIf="msg">{{msg}}</div>
+    <mat-card-header>
+        <mat-card-title>
+            <div *ngIf="path;else altimage">
+                <img [src]="path" class="imgUser"> {{userDetails.fullName }}
+            </div>
+            <ng-template #altimage>
+                <img src="../../../../assets/imgs/user.png" class="imgUser">{{fullname }}
+            </ng-template>
+        </mat-card-title>
+
+
+
+
+
+        <mat-card-subtitle class="ml-4">{{role }}</mat-card-subtitle>
+
+    </mat-card-header>
+    <h3>E-mail: {{email}}</h3>
+    <mat-divider></mat-divider>
+    <mat-card-actions align="end">
+        <button class="btn btn-primary pull-right" type="submit" (click)="onLogout()">
+            <mat-icon>logout</mat-icon> Log out </button>
+        <button mat-flat-button color="warn" (click)="ShowDivUpdate()">Ajouter une photo</button></mat-card-actions>
+
+    <div class="card" *ngIf="show == true">
+        <form [formGroup]="UserService.formImages" (submit)="onSubmit()" class="container" enctype="multipart/form-data">
+            <mat-form-field appearance="outline">
+                <ngx-mat-file-input formControlName="filename" placeholder="Select Image" valuePlaceholder="No image file selected">
+                    <mat-icon matSuffix>image</mat-icon>
+                </ngx-mat-file-input>
+            </mat-form-field>
+            <button mat-raised-button class="ml-10" color="primary" type="submit"><mat-icon>save</mat-icon>save</button>
+        </form>
+    </div>
+</mat-card>

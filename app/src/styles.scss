@@ -1,0 +1,71 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.hide {
+    display: none;
+}
+
+mat-footer-row mat-footer-cell {
+    justify-content: center;
+    font-style: italic;
+}
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.search-form-field {
+    width: 90%;
+    height: 50px;
+    margin-left: 10px;
+    padding: 0px 10px;
+    border-radius: 5px;
+}
+
+@media(max-width:1000px) {
+    /* .search-form-field { */
+    /* width: 80%; */
+    /* height: 50px; */
+    /* margin-left: 10px; */
+    /* padding: 0px 10px; */
+    /* border-radius: 5px; */
+    /* } */
+}
+
+.search-form-field div.mat-form-flied-underline {
+    display: none;
+}
+
+.snack-bar-container.success {
+    background-color: beige;
+    color: blueviolet;
+    font-size: medium;
+    font-weight: 100;
+}
+
+#icon {
+    height: 100px;
+    width: 100px;
+    /* margin-left: 40%; */
+}
+
+.btnIcon {
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+}

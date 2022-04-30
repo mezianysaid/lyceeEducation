@@ -1,0 +1,15 @@
+.underlineHover {
+    margin-left: 10px;
+    background-color: blueviolet;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+mat-tab {
+    width: 50%;
+    background-color: gray
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+}

@@ -1,0 +1,11 @@
+<nav mat-tab-nav-bar animationDuration="100ms" mat-align-tabs="center">
+      <a mat-tab-link *ngFor="let link of paths" [routerLink]="link.path" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">{{link.label}}
+  
+      <mat-select>
+          <mat-option routerLink="{{link.path}}/cours">Cours</mat-option>
+          <mat-divider></mat-divider>
+          <mat-option routerLink="{{link.path}}/td">TDs</mat-option>
+      </mat-select>
+      </a>
+  </nav>
+  <router-outlet></router-outlet>

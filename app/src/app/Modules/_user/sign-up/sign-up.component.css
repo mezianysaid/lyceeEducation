@@ -1,0 +1,21 @@
+.succes {
+    background-color: chartreuse;
+    color: black;
+    font-size: larger;
+    height: 100px;
+}
+
+#icon {
+    height: 100px;
+    width: 100px;
+    margin-left: 40%;
+}
+
+
+/* mat-form-field { */
+
+
+/* width: 50%; */
+
+
+/* } */

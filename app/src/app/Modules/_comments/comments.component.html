@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <mat-toolbar class="container">
+        Comments: Please leave us a comment
+        <mat-icon>sentiment_very_satisfied</mat-icon>
+    </mat-toolbar>
+    <div class="m-2 pb-0 card container" *ngFor="let comment of list_comments">
+        <div class="row">
+            <div *ngIf="comment.user.image;else altimage">
+                <img [src]="comment.user.image.filename" class="foto ml-4 mr-2 mt-2 pb-0">
+            </div>
+            <ng-template #altimage>
+                <img src="../../assets/imgs/user.jpg" class="foto ml-4 mr-2 mt-2 pb-0">
+            </ng-template>
+            <div class="mt-2 pb-0">
+                <h3>{{comment.user.fullName}}</h3>
+            </div>
+            <sub class="divname ml-4 mt-3 pb-0">{{comment.createAt|date:"dd-MM-YYYY"}}</sub>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="pb-0">
+            <div class="pb-1 pt-1 leftBorder ">
+                <section class="ml-0">
+                    <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(comment.comments!)"></div>
+                </section>
+            </div>
+        </div>
+
+    </div>
+    <!-- </div> -->
+    <!--  -->
+    <!-- **** BLOG OF COMMENT********************************************************************************************** -->
+    <mat-toolbar><u><i>Add Comment:</i></u>
+
+    </mat-toolbar>
+    <mat-card>
+        <form [formGroup]="_commentService.formComment" (ngSubmit)="onCreate()">
+            <p-editor formControlName="Comment" [style]="{'height':'320px'}"></p-editor>
+            <div align="end">
+                <button mat-raised-button type="submit" class="btn btn-primary" [disabled]="_commentService.formComment.invalid"><mat-icon>add</mat-icon>Add Comment</button>
+                <button mat-raised-button color="warn" type="reset" matTooltip="YOU WILL DELETE THESE INFORMATION !" matTooltipPosition="above"><mat-icon>cancel</mat-icon>Cancel</button>
+            </div>
+        </form>
+        <!-- </mat-step> -->
+        <!-- </mat-horizontal-stepper> -->
+    </mat-card>
+
+</div>
